@@ -527,7 +527,7 @@ q_2_2 = 'A,D'
 # 0.05 to 0.1. Use at least 2 values for every hyperparameter. Evaluate all pipelines using AUC (area under the ROC curve) with 3-fold cross-validation. Compare all methods with the same cross-validation folds, shuffle the data and use `random_state=1`.
 # Plot the results in a heatmap in function `plot_3_1`.
 
-# In[37]:
+# In[52]:
 
 
 #Implement
@@ -542,8 +542,8 @@ def plot_3_1(X, y):
     
     #number of trees from 100 to 1500 & max_features from 0.05 to 0.1
     param_grid = {
-        'classifier__n_estimators':[100, 1500],
-        'classifier__max_features':[0.05 ,0.1]
+        'classifier__n_estimators':[100, 1000, 1500],
+        'classifier__max_features':[0.05, 0.075 ,0.1]
              }
     
     #Evaluate all pipelines using AUC
@@ -551,8 +551,8 @@ def plot_3_1(X, y):
     
     gridsearch.fit(X, y)
     
-    results = np.asarray(gridsearch.cv_results_['mean_test_score']).reshape(2,2)
-    heatmap(['100','1500'], [0.05 ,0.1], results)
+    results = np.asarray(gridsearch.cv_results_['mean_test_score']).reshape(3,3)
+    heatmap(['100','1000','1500'], ['0.05', '0.075' ,'0.1'], results)
     
 
 plot_3_1(X,y)
